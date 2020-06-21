@@ -71,6 +71,7 @@ class Game extends React.Component {
         col: col,
       }]),
       stepNumber: history.length,
+      selectedButton: null,
       xIsNext: !this.state.xIsNext,
     });
   }
@@ -78,6 +79,7 @@ class Game extends React.Component {
   jumpTo(step) {
     this.setState({
       stepNumber: step,
+      selectedButton: step,
       xIsNext: (step % 2) === 0,
     })
   }
@@ -89,12 +91,14 @@ class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move ?
-        'Go go move #' + move + ", (" + step.col + "," + step.row + ")":
+        'Go to move #' + move + ", (" + step.col + "," + step.row + ")":
         'Go to game start';
       return (
-        <li key = {move}>
-          <button onClick = {() => this.jumpTo(move)}>{desc}</button>
-        </li>
+        <li key = {move}> {
+          move === this.state.selectedButton?
+            <button onClick = {() => this.jumpTo(move)}><b>{desc}</b></button> :
+            <button onClick = {() => this.jumpTo(move)}>{desc}</button>
+        }</li>
       )
     });
 
