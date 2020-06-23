@@ -52,6 +52,7 @@ class Game extends React.Component {
         col: 0,
       }],
       stepNumber: 0,
+      selectedButton: null,
       xIsNext: true,
     }
   }
