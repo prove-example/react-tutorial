@@ -19,24 +19,29 @@ class Board extends React.Component {
       />);
   }
 
+  renderRow(rownum) {
+    let squareoffset = 3*(3-rownum);
+    let squares = [];
+
+    for (let colnum = 1; colnum < 4; colnum++) {
+      squares.push(this.renderSquare(squareoffset+colnum-1,rownum,colnum));
+    }
+    return (
+      <div className="board-row">
+        {squares}
+      </div>
+    );
+  }
+
   render() {
+    let rows = [];
+
+    for (let rownum = 3; rownum > 0; rownum--) {
+      rows.push(this.renderRow(rownum));
+    }
     return (
       <div>
-        <div className="board-row">
-          {this.renderSquare(0,3,1)}
-          {this.renderSquare(1,3,2)}
-          {this.renderSquare(2,3,3)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3,2,1)}
-          {this.renderSquare(4,2,2)}
-          {this.renderSquare(5,2,3)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6,1,1)}
-          {this.renderSquare(7,1,2)}
-          {this.renderSquare(8,1,3)}
-        </div>
+        {rows}
       </div>
     );
   }
